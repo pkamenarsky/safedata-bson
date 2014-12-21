@@ -7,9 +7,7 @@ module Data.SafeData.Bson
 
 import qualified Data.Bson            as B
 import           Data.Bson            (Field ((:=)), (=:))
-import qualified Data.HashMap.Strict  as H
-import qualified Data.SafeCopy        as S
-import qualified Data.Scientific      as SF
+import qualified Data.SafeData        as S
 import qualified Data.Text            as T
 import qualified Data.Vector          as V
 
