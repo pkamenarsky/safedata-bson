@@ -1,13 +1,24 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Data.SafeData.Bson where
+module Data.SafeData.Bson
+  ( valToDoc
+  , valToDocUnsafe
+  ) where
 
 import qualified Data.Bson            as B
 import           Data.Bson            ((=:))
+import           Data.Maybe           (fromMaybe)
 import qualified Data.SafeData        as S
 import qualified Data.Text            as T
 import qualified Data.Vector          as V
 import           Data.Word
+
+valToDoc :: B.Value -> Maybe B.Document
+valToDoc (B.Doc vs) = Just vs
+valToDoc _          = Nothing
+
+valToDocUnsafe :: B.Value -> B.Document
+valToDocUnsafe = fromMaybe (error "Expected Document") . valToDoc
 
 instance B.Val Word8 where
   val                = B.Float . fromInteger . toInteger
